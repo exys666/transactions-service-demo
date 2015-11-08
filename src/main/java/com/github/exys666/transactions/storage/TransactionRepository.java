@@ -24,7 +24,7 @@ public class TransactionRepository {
     public Transaction get(long id) {
         Transaction transaction = transactions.get(id);
         if(transaction == null) {
-            throw new TransactionNotFoundException(transaction);
+            throw new TransactionNotFoundException(id);
         }
         return  transaction;
     }

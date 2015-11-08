@@ -9,7 +9,7 @@ import static java.lang.String.format;
 @ResponseStatus(value = HttpStatus.NOT_FOUND, reason = "Transaction Not Found")
 public class TransactionNotFoundException extends RuntimeException{
 
-    public TransactionNotFoundException(Transaction transaction) {
-        super(format("Transaction with ID = %d not found", transaction.getId()));
+    public TransactionNotFoundException(long id) {
+        super(format("Transaction with ID = %d not found", id));
     }
 }
