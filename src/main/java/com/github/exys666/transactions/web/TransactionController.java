@@ -1,5 +1,6 @@
 package com.github.exys666.transactions.web;
 
+import com.github.exys666.transactions.dto.TransactionDTO;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
@@ -12,12 +13,12 @@ public class TransactionController {
 
     @RequestMapping(method = PUT, value = "/{id}")
     @ResponseStatus(HttpStatus.CREATED)
-    public void putTransaction(@PathVariable("id") long id) {
+    public void putTransaction(@PathVariable("id") long id, @RequestBody TransactionDTO dto) {
 
     }
 
     @RequestMapping(method = GET, value = "/{id}")
-    public void getTransaction(@PathVariable("id") long id) {
-
+    public TransactionDTO getTransaction(@PathVariable("id") long id) {
+        return null;
     }
 }
