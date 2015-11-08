@@ -22,6 +22,7 @@ public class CreateTransactionTest extends AbstractTest {
                                 .get("/transactionsservice/transaction/1")
                             .then()
                                 .statusCode(200)
+                            .and()
                                 .extract().body().jsonPath();
         // @formatter:on
 

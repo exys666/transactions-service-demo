@@ -5,6 +5,7 @@ import com.github.exys666.transactions.model.Transaction;
 import lombok.NoArgsConstructor;
 
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
 
 import static java.util.stream.Collectors.toList;
@@ -16,7 +17,7 @@ public class TransactionsByTypeDTO extends ArrayList<Long> {
         this.addAll(ids);
     }
 
-    public static TransactionsByTypeDTO create(List<Transaction> transactions) {
+    public static TransactionsByTypeDTO create(Collection<Transaction> transactions) {
         List<Long> ids = transactions.stream().map(Transaction::getId).collect(toList());
         return new TransactionsByTypeDTO(ids);
     }
