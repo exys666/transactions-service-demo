@@ -5,6 +5,7 @@ import com.github.exys666.transactions.model.Transaction;
 import com.github.exys666.transactions.storage.TransactionRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 import static org.springframework.web.bind.annotation.RequestMethod.GET;
@@ -19,7 +20,7 @@ public class TransactionController {
 
     @RequestMapping(method = PUT, value = "/{id}")
     @ResponseStatus(HttpStatus.CREATED)
-    public void putTransaction(@PathVariable("id") long id, @RequestBody TransactionDTO dto) {
+    public void putTransaction(@PathVariable("id") long id, @Validated @RequestBody TransactionDTO dto) {
         Transaction.TransactionBuilder builder = Transaction.builder();
 
         builder

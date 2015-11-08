@@ -16,14 +16,14 @@ public class TransactionRepository {
     public Transaction get(long id) {
         Transaction transaction = transactions.get(id);
         if(transaction == null) {
-            throw new TransactionNotFoundException();
+            throw new TransactionNotFoundException(transaction);
         }
         return  transaction;
     }
 
     public synchronized void add(Transaction transaction) {
         if(transactions.containsKey(transaction.getId())) {
-            throw new TransactionConflictException();
+            throw new TransactionConflictException(transaction);
         }
         transactions.put(transaction.getId(), transaction);
     }

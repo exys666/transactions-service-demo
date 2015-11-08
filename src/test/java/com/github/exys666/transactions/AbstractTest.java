@@ -3,7 +3,6 @@ package com.github.exys666.transactions;
 import com.github.exys666.transactions.dto.TransactionDTO;
 import com.github.exys666.transactions.storage.TransactionRepository;
 import com.jayway.restassured.RestAssured;
-import com.jayway.restassured.http.ContentType;
 import com.jayway.restassured.response.Response;
 import com.jayway.restassured.specification.RequestSpecification;
 import org.junit.After;
@@ -34,6 +33,10 @@ public abstract class AbstractTest {
 
     public RequestSpecification given() {
         return RestAssured.given().port(port);
+    }
+
+    public RequestSpecification when() {
+        return given().when();
     }
 
     public Response createTransaction(long id, TransactionDTO dto) {

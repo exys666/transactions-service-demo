@@ -9,7 +9,7 @@ public class SumTest extends AbstractTest {
 
     @Test
     public void shouldBeEqualToAmountIfNoChildrenTransactions() {
-        TransactionDTO dto = new TransactionDTO(10, "someType", null);
+        TransactionDTO dto = new TransactionDTO(10.0, "someType", null);
 
         createTransaction(1L, dto).then().statusCode(201);
 
@@ -18,9 +18,9 @@ public class SumTest extends AbstractTest {
 
     @Test
     public void shouldCountChildrenAmount() {
-        TransactionDTO parent = new TransactionDTO(10, "type1", null);
-        TransactionDTO child1 = new TransactionDTO(20, "type2", 1L);
-        TransactionDTO child2 = new TransactionDTO(30, "type3", 1L);
+        TransactionDTO parent = new TransactionDTO(10.0, "type1", null);
+        TransactionDTO child1 = new TransactionDTO(20.0, "type2", 1L);
+        TransactionDTO child2 = new TransactionDTO(30.0, "type3", 1L);
 
         createTransaction(1L, parent).then().statusCode(201);
         createTransaction(2L, child1).then().statusCode(201);
@@ -31,9 +31,9 @@ public class SumTest extends AbstractTest {
 
     @Test
     public void shouldCountGrandChildrenAmount() {
-        TransactionDTO parent = new TransactionDTO(10, "type1", null);
-        TransactionDTO child1 = new TransactionDTO(20, "type2", 1L);
-        TransactionDTO child2 = new TransactionDTO(30, "type3", 2L);
+        TransactionDTO parent = new TransactionDTO(10.0, "type1", null);
+        TransactionDTO child1 = new TransactionDTO(20.0, "type2", 1L);
+        TransactionDTO child2 = new TransactionDTO(30.0, "type3", 2L);
 
         createTransaction(1L, parent).then().statusCode(201);
         createTransaction(2L, child1).then().statusCode(201);
@@ -42,10 +42,19 @@ public class SumTest extends AbstractTest {
         assertThat(sum(1L)).isEqualTo(parent.getAmount() + child1.getAmount() + child2.getAmount());
     }
 
+    @Test
+    public void shouldRespondWithNotFoundWhenCallSumOfNotExistingTransaction() {
+        // @formatter:off
+        when()
+            .get("/transactionsservice/sum/1")
+        .then()
+            .statusCode(404);
+        // @formatter:on
+    }
+
     private double sum(long id) {
         // @formatter:off
-        return given()
-        .when()
+        return when()
             .get("/transactionsservice/sum/" + id)
         .then()
             .statusCode(200)

@@ -6,6 +6,9 @@ import com.github.exys666.transactions.model.Transaction;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.hibernate.validator.constraints.NotEmpty;
+
+import javax.validation.constraints.NotNull;
 
 import static com.fasterxml.jackson.annotation.JsonInclude.Include.NON_NULL;
 
@@ -15,7 +18,9 @@ import static com.fasterxml.jackson.annotation.JsonInclude.Include.NON_NULL;
 @AllArgsConstructor
 public class TransactionDTO {
 
-    private double amount;
+    @NotNull
+    private Double amount;
+    @NotEmpty
     private String type;
     private Long parentId;
 
